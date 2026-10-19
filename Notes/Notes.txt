@@ -1,0 +1,5 @@
+Maybe make this into an obsidian vault if I like?
+
+The evolutionary algorithm is good, but the main problem is that a lot of the good candidates are thrown away, so that the subsequent generations with no better candidates will overwrite the current best.
+
+Solution, keep the best parents in the next generation
