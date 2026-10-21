@@ -1,0 +1,2 @@
+Run the following from the root of this project!
+source venv/bin/activate
