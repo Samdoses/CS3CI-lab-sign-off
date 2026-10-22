@@ -219,7 +219,7 @@ def solve_tsp(
       else:
         offspring_1, offspring_2 = parent_1, parent_2
 
-      offspring.append(parent_1)
+      offspring.append(offspring_1)
       idx += 1      
       # If the number of offspring is not divisible by 2, don't overfill the
       # offspring array.
