@@ -233,9 +233,22 @@ def solve_tsp(
 
   # In pygad, the EA will stop if its "on_generation" method returns the string
   # "stop" at any point. We will do this using a time-based criterion.
+  best_cost_so_far = float('inf')
   termination_criterion = termination.Time_Expired(time_limit)
+
   def time_based_termination(ga_instance):
-    if termination_criterion.condition_met(None,None,None):
+    nonlocal best_cost_so_far
+    # Unpack the best solution of the current generation
+    solution, solution_fitness, _ = ga_instance.best_solution(ga_instance.last_generation_fitness)
+    current_cost = -1 * solution_fitness if is_minimization else solution_fitness #Converts the cost back into a positive value if it was not stored as an minimisation problem fitness score
+
+    # Only print when a strictly better tour is found
+    if current_cost < best_cost_so_far:
+      best_cost_so_far = current_cost
+      print("New best cost is {}.".format(best_cost_so_far))
+      print("New best solution is {}.".format(list(complete_tsp_loop(solution).tolist())))
+
+    if termination_criterion.condition_met(None, None, None):
       return "stop"
     else:
       return None
