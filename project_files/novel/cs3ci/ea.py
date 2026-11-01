@@ -16,6 +16,7 @@ def swap_mutation(offspring):
   mutated_offspring[i], mutated_offspring[j] = offspring[j], offspring[i]
   return mutated_offspring
 
+#!NOVEL!#
 # Performs a inversion mutation on a single offspring, returning the mutated individual 
 # (pg69 Introduction to evolutionary programming)
 def inversion_mutation(offspring):

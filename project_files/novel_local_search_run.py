@@ -35,15 +35,6 @@ def neighbourhood(soln):
       neighbours.append(neighbour)
   return neighbours
 
-def two_opt_neighbourhood(soln):
-  neighbours = []
-  for i in range(1,len(soln)-2):
-    for j in range(i+1,len(soln)-1):
-      neighbour = copy.deepcopy(soln) # Warning about shallow copies
-      neighbour[i : j + 1] = neighbour[i : j + 1][::-1] #reverse the route between index i and j
-      neighbours.append(neighbour)
-  return neighbours
-
 # Our evaluation function simply returns the length of a TSP tour on the
 # problem at hand.
 def evaluate(route):
@@ -58,7 +49,7 @@ LOCAL_SEARCH_TIME_LIMIT = 3
 # that we are passing in the problem-specific functions defined above
 # (initializer, evaluate, neighbourhood) and the general purpose methods
 # (local_search.termination.Time_Expired,
-# local_search.step_function.best_improver).
+# local_search.step_function.better_improver).
 print('#'*80)
 print('Running local search without restart for {} seconds'.format(
   LOCAL_SEARCH_TIME_LIMIT))
@@ -68,8 +59,8 @@ local_search_route, local_search_route_cost = local_search.run(
   initializer,
   evaluate,
   local_search.termination.Time_Expired(LOCAL_SEARCH_TIME_LIMIT),
-  two_opt_neighbourhood,
-  local_search.step_function.best_improver,
+  neighbourhood,
+  local_search.step_function.better_improver,
   print_improvements = True
 )
 #...and display the result.
