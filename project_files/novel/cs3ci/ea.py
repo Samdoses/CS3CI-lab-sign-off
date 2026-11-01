@@ -188,7 +188,7 @@ def solve_tsp(
   # ...unless the user has chosen to use elitism. If so, keep the single
   # fittest individual.
   if elitism:
-    keep_elitism = 1
+    keep_elitism = 2
   else:
     keep_elitism = 0
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
