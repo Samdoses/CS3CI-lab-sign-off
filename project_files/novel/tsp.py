@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.classes.function import path_weight
 import random
+import pandas as pd
 
 # Constructs a TSP instance from a matrix (i.e. list of lists) adjacency_matrix
 # in which adjacency_matrix[i][j] corresponds to the length of the edge from
@@ -123,3 +124,33 @@ def random_route(tsp_instance):
   random.shuffle(route_middle)
   # Add the starting city and loop back to it at the end.
   return [0] + route_middle + [0]
+
+  
+def load_tsp_data(csv_path):
+  raw_df = pd.read_csv(csv_path, comment='%', header=None)
+  raw_df = raw_df.dropna(how='all').dropna(axis=1, how='all')
+
+  has_header = False
+  for val in raw_df.iloc[0]:
+    if pd.isna(val):
+      has_header = True
+      break
+    try:
+      float(str(val).strip())
+    except ValueError:
+      has_header = True
+      break
+
+  data_df = raw_df.iloc[1:].copy() if has_header else raw_df.copy()
+  mat = data_df.astype(float).values
+  n_rows, n_cols = mat.shape
+
+  # Case 1: N x N Adjacency Matrix (no x,y coordinates in file)
+  if n_rows == n_cols and n_cols >= 4 and np.allclose(np.diag(mat), 0.0):
+    return construct(mat), None
+  if n_cols == n_rows + 1 and n_rows >= 4 and np.allclose(np.diag(mat[:, 1:]), 0.0):
+    return construct(mat[:, 1:]), None
+
+  # Case 2: Coordinate columns (handles 2-col [x, y] or 3-col [id, x, y])
+  city_coords = mat[:, -2:]
+  return construct_from_city_coords(city_coords), city_coords

@@ -2,8 +2,7 @@ import pandas as pd
 from novel import tsp
 from novel import cs3ci
 
-ulysses16_coords = pd.read_csv('ulysses16.csv',header=0).values
-tsp_instance = tsp.construct_from_city_coords(ulysses16_coords)
+tsp_instance, ulysses16_coords = tsp.load_tsp_data('test(1).csv')
 TIME_LIMIT = 3
 
 print('Running an EA for {} seconds'.format(

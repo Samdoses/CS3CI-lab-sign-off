@@ -19,8 +19,7 @@ import copy
 #   - evaluation function
 
 # Our initialisation method is just to generate a random route
-ulysses16_coords = pd.read_csv('ulysses16.csv',header=0).values
-ulysses16_tsp_instance = tsp.construct_from_city_coords(ulysses16_coords)
+ulysses16_tsp_instance, ulysses16_coords = tsp.load_tsp_data('test(1).csv')
 def initializer():
   return tsp.random_route(ulysses16_tsp_instance)
 
