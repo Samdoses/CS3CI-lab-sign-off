@@ -19,7 +19,7 @@ import copy
 #   - evaluation function
 
 # Our initialisation method is just to generate a random route
-ulysses16_tsp_instance, ulysses16_coords = tsp.load_tsp_data('test(1).csv')
+ulysses16_tsp_instance, ulysses16_coords = tsp.load_tsp_data('cities15_13.csv')
 def initializer():
   return tsp.random_route(ulysses16_tsp_instance)
 
@@ -42,7 +42,7 @@ def evaluate(route):
 # We were asked to use a time-based termination condition. As mentioned above,
 # This is implemented in tsp.termination. Let's define the time limit (in
 # seconds) that we will give our algorithm.
-LOCAL_SEARCH_TIME_LIMIT = 3
+LOCAL_SEARCH_TIME_LIMIT = 5
 
 # With those methods defined, we can run random search (without restart). Note
 # that we are passing in the problem-specific functions defined above

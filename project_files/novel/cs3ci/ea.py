@@ -187,6 +187,7 @@ def solve_tsp(
   keep_parents = 0
   # ...unless the user has chosen to use elitism. If so, keep the single
   # fittest individual.
+  # !NOVEL!
   if elitism:
     keep_elitism = 2
   else:

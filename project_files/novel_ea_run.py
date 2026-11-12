@@ -2,8 +2,8 @@ import pandas as pd
 from novel import tsp
 from novel import cs3ci
 
-tsp_instance, ulysses16_coords = tsp.load_tsp_data('test(1).csv')
-TIME_LIMIT = 3
+tsp_instance, ulysses16_coords = tsp.load_tsp_data('cities15_13.csv')
+TIME_LIMIT = 5
 
 print('Running an EA for {} seconds'.format(
   TIME_LIMIT))
